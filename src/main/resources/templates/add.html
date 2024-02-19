@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Entity</title>
+</head>
+<body>
+<h1>Add Entity</h1>
+<div th:if="${successMessage}">
+    <div style="color: green;">
+        <p th:text="${successMessage}"></p>
+    </div>
+</div>
+<div th:if="${errorMessage}">
+    <div style="color: red;">
+        <p th:text="${errorMessage}"></p>
+    </div>
+</div>
+<form action="/add" method="post">
+    <label for="attribute1">Midlname</label><br>
+    <input type="text" id="attribute1" name="secondName"><br>
+    <label for="attribute2">Name</label><br>
+    <input type="text" id="attribute2" name="firstName"><br>
+    <label for="attribute3">Surname</label><br>
+    <input type="text" id="attribute3" name="lastName"><br><br>
+    <input type="submit" value="Submit">
+</form>
+<a href="/">Back to Home</a>
+</body>
+</html>

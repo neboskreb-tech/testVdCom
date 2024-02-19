@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entities</title>
+</head>
+<body>
+<h1>Entities</h1>
+<div th:if="${successMessage}">
+    <div style="color: green;">
+        <p th:text="${successMessage}"></p>
+    </div>
+</div>
+<div th:if="${errorMessage}">
+    <div style="color: red;">
+        <p th:text="${errorMessage}"></p>
+    </div>
+</div>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>MidlName</th>
+        <th>Name</th>
+        <th>Surname</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="entity : ${entities}">
+        <td th:text="${entity.id}"></td>
+        <td th:text="${entity.secondName}"></td>
+        <td th:text="${entity.firstName}"></td>
+        <td th:text="${entity.lastName}"></td>
+        <td>
+            <a th:href="@{'/edit/' + ${entity.id}}">Edit</a> |
+            <a th:href="@{'/delete/' + ${entity.id}}">Delete</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<br>
+<a href="/add">Add Entity</a>
+<form action="/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" accept=".csv">
+    <button type="submit">Upload CSV</button>
+</form>
+</body>
+</html>

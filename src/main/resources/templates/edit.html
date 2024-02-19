@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Entity</title>
+</head>
+<body>
+<h1>Edit Entity</h1>
+<div th:if="${successMessage}">
+    <div style="color: green;">
+        <p th:text="${successMessage}"></p>
+    </div>
+</div>
+<div th:if="${errorMessage}">
+    <div style="color: red;">
+        <p th:text="${errorMessage}"></p>
+    </div>
+</div>
+<form action="/update" method="post">
+    <input type="hidden" name="id" th:value="${entity.id}">
+    <label for="attribute1">Midlname</label><br>
+    <input type="text" id="attribute1" name="secondName" th:value="${entity.secondName}"><br>
+    <label for="attribute2">Name</label><br>
+    <input type="text" id="attribute2" name="firstName" th:value="${entity.firstName}"><br>
+    <label for="attribute3">surname</label><br>
+    <input type="text" id="attribute3" name="lastName" th:value="${entity.lastName}"><br><br>
+    <input type="submit" value="Submit">
+</form>
+<a href="/">Back to Home</a>
+</body>
+</html>
