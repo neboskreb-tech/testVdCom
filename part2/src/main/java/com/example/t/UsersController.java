@@ -27,14 +27,12 @@ public class UsersController {
     @GetMapping("/add")
     public ModelAndView add() {
         ModelAndView modelAndView = new ModelAndView("add");
-        List<Users> entities = entityRepository.findAll();
-        modelAndView.addObject("entities", entities);
         return modelAndView;
     }
 
     @PostMapping("/add")
     public String addEntity(@ModelAttribute Users entity,RedirectAttributes redirectAttributes) {
-        if (!entityRepository.findByFirstNameAndSecondNameAndLastName( entity.getFirstName(), entity.getSecondName(),entity.getLastName())) {
+        if (!entityRepository.existsByFirstNameAndSecondNameAndLastName( entity.getFirstName(), entity.getSecondName(),entity.getLastName())) {
             entityRepository.save(entity);
             redirectAttributes.addFlashAttribute("successMessage", "Entity updated successfully.");
         }else {
@@ -59,7 +57,7 @@ public class UsersController {
             entity.setSecondName(updatedEntity.getSecondName());
             entity.setFirstName(updatedEntity.getFirstName());
             entity.setLastName(updatedEntity.getLastName());
-            if (!entityRepository.findByFirstNameAndSecondNameAndLastName(entity.getFirstName(),entity.getSecondName(),  entity.getLastName()) || entity.equals(updatedEntity)) {
+            if (!entityRepository.existsByFirstNameAndSecondNameAndLastName(entity.getFirstName(),entity.getSecondName(),  entity.getLastName()) || entity.equals(updatedEntity)) {
                 entityRepository.save(entity);
                 redirectAttributes.addFlashAttribute("successMessage", "Entity updated successfully.");
             }else {
@@ -93,7 +91,7 @@ public class UsersController {
                         entity.setLastName(attributes[2]);
 
 
-                        if (!entityRepository.findByFirstNameAndSecondNameAndLastName(entity.getFirstName(),entity.getSecondName(), entity.getLastName())) {
+                        if (!entityRepository.existsByFirstNameAndSecondNameAndLastName(entity.getFirstName(),entity.getSecondName(), entity.getLastName())) {
                             entityRepository.save(entity);
                         }
                     }
